@@ -25,6 +25,7 @@ d3.json(samples).then(function (data) {
         let dropdownMenu = d3.select("#selDataset");
         let testSubjectId = dropdownMenu.property("value");
         let testSubjectData = data.samples.filter(object => object.id === testSubjectId)[0];
+        let testSubjectMetaData = data.metadata.filter(object => object.id.toString() === testSubjectId)[0];
         let otuIds = testSubjectData.otu_ids;
         let sampleValues = testSubjectData.sample_values;
         let otuLabels = testSubjectData.otu_labels;
@@ -77,6 +78,19 @@ d3.json(samples).then(function (data) {
         };
 
         Plotly.newPlot("bubble", [bubbleChartValues], bubbleChartLayout);
+
+        //demographic info
+        // {"id": 940, "ethnicity": "Caucasian", "gender": "F", "age": 24.0, "location": "Beaufort/NC", "bbtype": "I", "wfreq": 2.0}, 
+        let sampleMetaDataElement = document.getElementById("sample-metadata");
+        sampleMetaDataElement.innerHTML = "";
+        for (let key in testSubjectMetaData) {
+            let value = testSubjectMetaData[key];
+            let paragraphElement = document.createElement("p");
+            paragraphElement.innerText = `${key}: ${value}`;
+            sampleMetaDataElement.append(paragraphElement);
+        }
     }
+
+
 });
 
