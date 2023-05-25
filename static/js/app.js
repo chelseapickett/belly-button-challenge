@@ -43,7 +43,7 @@ d3.json(samples).then(function (data) {
 
         // Apply a title to the layout
         let barChartLayout = {
-            title: "Top Ten Individual OTUs",
+            title: "Top Ten OTUs per Sample ID",
             margin: {
                 l: 100,
                 r: 100,
@@ -64,11 +64,20 @@ d3.json(samples).then(function (data) {
                 size: sampleValues,
                 color: otuIds,
             }
-            //type: "bubble",
         };
 
         let bubbleChartLayout = {
-            //title: "Top Ten Individual OTUs",
+            title: "All OTUs per Sample ID",
+            xaxis: {
+                title: {
+                    text: "OTU ID"
+                }
+            },
+            yaxis: {
+                title: {
+                    text: "SAMPLE VALUE"
+                }
+            },
             margin: {
                 l: 100,
                 r: 100,
